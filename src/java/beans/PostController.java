@@ -20,7 +20,9 @@ import javax.faces.bean.ManagedBean;
 @ApplicationScoped
 @ManagedBean
 public class PostController {
+
     private List<Post> posts;
+    private Post currentPost;
 
     public PostController() {
         updatePostsFromDatabase();
@@ -30,8 +32,12 @@ public class PostController {
         return posts;
     }
 
+    public Post getCurrentPost() {
+        return currentPost;
+    }
+
     private void updatePostsFromDatabase() {
-        try {            
+        try {
             posts = new ArrayList<>();
             // Make a Connection
             Connection conn = Utils.getConnection();
@@ -55,5 +61,29 @@ public class PostController {
         } catch (SQLException ex) {
             Logger.getLogger(PostController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public String savePost() {
+        try {
+            // Make a Connection
+            Connection conn = Utils.getConnection();
+            
+            // Build a Query
+            String sql = "UPDATE posts SET title = ?, contents = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);            
+            pstmt.setString(1, currentPost.getTitle());
+            pstmt.setString(2, currentPost.getContents());
+            pstmt.setInt(3, currentPost.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "viewPost";
+    }
+
+    // Navigation Methods
+    public String viewPost(Post post) {
+        currentPost = post;
+        return "viewPost";
     }
 }

@@ -25,14 +25,14 @@ public class Post {
     private int id;
     private int user_id;
     private String title;
-    private Date createdTime;
+    private Date created_time;
     private String contents;
 
     public Post(int id, int user_id, String title, Date createdTime, String contents) {
         this.id = id;
         this.user_id = user_id;
         this.title = title;
-        this.createdTime = createdTime;
+        this.created_time = createdTime;
         this.contents = contents;
     }
 
@@ -60,12 +60,12 @@ public class Post {
         this.title = title;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
+    public Date getCreated_time() {
+        return created_time;
     }
 
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+    public void setCreated_time(Date createdTime) {
+        this.created_time = createdTime;
     }
 
     public String getContents() {
