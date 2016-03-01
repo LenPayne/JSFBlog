@@ -36,6 +36,25 @@ public class PostController {
         return currentPost;
     }
 
+    public Post getPostById(int id) {
+        for (Post p : posts) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public List<Post> getPostsByUserId(int userId) {
+        List<Post> result = new ArrayList<>();
+        for (Post p : posts) {
+            if (p.getUser_id() == userId) {
+                result.add(p);
+            }
+        }
+        return result;
+    }
+
     private void updatePostsFromDatabase() {
         try {
             posts = new ArrayList<>();
@@ -67,10 +86,10 @@ public class PostController {
         try {
             // Make a Connection
             Connection conn = Utils.getConnection();
-            
+
             // Build a Query
             String sql = "UPDATE posts SET title = ?, contents = ? WHERE id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);            
+            PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, currentPost.getTitle());
             pstmt.setString(2, currentPost.getContents());
             pstmt.setInt(3, currentPost.getId());

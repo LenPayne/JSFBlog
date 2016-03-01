@@ -13,15 +13,16 @@ import java.util.Date;
  */
 public class Post {
     /*
-    CREATE TABLE posts (
-        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        title VARCHAR(255) NOT NULL UNIQUE,
-        created_time DATETIME NOT NULL,
-        contents TEXT,
-        FOREIGN KEY posts(user_id) REFERENCES users(id)
-    );
-    */
+     CREATE TABLE posts (
+     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+     user_id INT NOT NULL,
+     title VARCHAR(255) NOT NULL UNIQUE,
+     created_time DATETIME NOT NULL,
+     contents TEXT,
+     FOREIGN KEY posts(user_id) REFERENCES users(id)
+     );
+     */
+
     private int id;
     private int user_id;
     private String title;
@@ -75,6 +76,10 @@ public class Post {
     public void setContents(String contents) {
         this.contents = contents;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Post{" + "id=" + id + ", user_id=" + user_id + ", title=" + title + ", created_time=" + created_time + ", contents=" + contents + '}';
+    }
+
 }
